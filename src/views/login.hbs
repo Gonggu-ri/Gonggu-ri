@@ -1,0 +1,53 @@
+<!---->
+
+<style>
+    body {
+        height: 75vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: #FF1A52;
+    }
+    .frame {
+        border-radius: 15px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 350px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #id, #passwd, .btn {
+        font-size: 25px;
+    }
+    .pwd {
+        margin-top: 15px;
+    }
+    .btn {
+        background-color: #4A5667;
+        color: #FFFFFF;
+        width: 322px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="frame">
+    <h1>공구리</h1>
+    <form id="id" method="post" action='/'> <!--경로에 post형식으로 ㅂ ㅗ-->
+        <div class="id">
+            <input id="id" name="id" type="text" required placeholder="ID"> <!--사용자 입력 태그-->
+        </div>
+        <div class="pwd">
+            <input id="passwd" name='password' type="password" required  placeholder="Password">
+        </div>
+        <button class='btn' type="submit">Login</button>
+    </form>
+</div>

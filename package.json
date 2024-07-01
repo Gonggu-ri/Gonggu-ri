@@ -1,0 +1,32 @@
+{
+  "name": "gonggu-ri",
+  "version": "1.0.0",
+  "description": "뚜깡 프로젝트",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gonggu-ri/Gonggu-ri.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gonggu-ri/Gonggu-ri/issues"
+  },
+  "homepage": "https://github.com/Gonggu-ri/Gonggu-ri#readme",
+  "dependencies": {
+    "@babel/core": "7.24.7",
+    "@babel/node": "7.24.7",
+    "@babel/preset-env": "7.24.7",
+    "body-parser": "1.20.2",
+    "dotenv": "16.4.5",
+    "express": "4.19.2",
+    "express-session": "1.18.0",
+    "morgan": "1.10.0",
+    "mysql2": "3.10.2",
+    "nodemon": "3.1.4"
+  }
+}
