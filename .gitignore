@@ -1,1 +1,4 @@
+# git에 없로드 되지 않도록 설정
+
 node_modules
+.env

@@ -1,0 +1,51 @@
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: #FF1A52;
+    }
+    .frame {
+        border-radius: 15px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 350px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    input {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+    .btn {
+        background-color: #4A5667;
+        color: #FFFFFF;
+        width: 322px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="frame">
+    <h1>회원가입</h1>
+    <form id="signupForm" method="post" action="/signup">
+        <div>
+            <input id="userId" name="userId" type="text" required placeholder="아이디">
+            <button type="button" id="checkIdBtn">중복확인</button>
+        </div>
+        <input id="userPassword" name="userPassword" type="password" required placeholder="비밀번호">
+        <input id="userEmail" name="userEmail" type="email" required placeholder="이메일">
+        <input id="userName" name="userName" type="text" required placeholder="이름">
+        <input id="phoneNumber" name="phoneNumber" type="text" required placeholder="휴대폰 번호">
+        <input id="userAddress" name="userAddress" type="text" required placeholder="주소">
+        <button class="btn" type="submit" id="signupBtn">공구리 함께하기</button>
+    </form>
+</div>
