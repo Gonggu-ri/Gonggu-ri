@@ -37,6 +37,7 @@ CREATE TABLE orders (
   deliveryAddress VARCHAR(50) NOT NULL, -- 배송지를 수정하지 않을시, userAdress가 기본값
   productsCount INT NOT NULL,
   orderState VARCHAR(5) NOT NULL,
+  orderTime TIMESTAMP DEFAULT NOW(),
   PRIMARY KEY (orderId),
   FOREIGN KEY (userId) REFERENCES users(userId) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (productId) REFERENCES products(productId) ON UPDATE CASCADE ON DELETE CASCADE
