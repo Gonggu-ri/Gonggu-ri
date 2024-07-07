@@ -1,29 +1,130 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공구리 홈</title>
-    <link rel="stylesheet" href="/styles/home.css">
+    <title>{{main_title}}</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #FF1A52;
+        }
+        .products-container {
+            width: 80%;
+            max-width: 1000px;
+            overflow-y: auto;
+            border: 1px solid #CCCCCC;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .product-image {
+            max-width: 100px;
+            max-height: 100px;
+            cursor: pointer; /* Add cursor pointer to indicate clickable */
+        }
+        .upload-link {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .search-form {
+            margin-bottom: 20px;
+        }
+        .search-input {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .search-btn {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #4A5667;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo">공구리</div>
-        <div class="nav-buttons">
-            <button onclick="location.href='/sell'">판매</button>
-            <button onclick="location.href='/buy'">구매</button>
-        </div>
-    </header>
-    <div class="main-content">
-        <div class="search-bar">
-            <input type="text" placeholder="상품명 검색">
-            <button onclick="location.href='/search'">🔍</button>
-        </div>
-        <h2>판매 중</h2>
-        <div class="products">
-            <!-- 상품 리스트가 여기에 표시될 예정 -->
-        </div>
+    <div class="products-container">
+        <h1>{{main_title}}</h1>
+        <h2>{{title}}</h2>
+
+        <form class="search-form">
+            <input class="search-input" type="text" id="searchInput" placeholder="상품 이름 검색">
+            <button class="search-btn" type="button" onclick="searchProducts()">검색</button>
+        </form>
+
+        <table id="productsTable">
+            <thead>
+                <tr>
+                    <th>상품 이름</th>
+                    <th>상품 이미지</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td>{{this.productName}}</td>
+                    <td><img class="product-image" src="{{this.productImage}}" alt="상품 이미지" onclick="redirectToBuyPage('{{this._id}}')"></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </div>
-    <button class="upload-button" onclick="location.href='/upload'">+ 공구하기</button>
+    <a href="/upload" class="upload-link">상품 판매하기</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function searchProducts() {
+            const searchInput = document.getElementById('searchInput').value.trim();
+            axios.get(`/home/search?productName=${searchInput}`)
+                .then(response => {
+                    const products = response.data;
+                    const productsTable = document.getElementById('productsTable').getElementsByTagName('tbody')[0];
+                    productsTable.innerHTML = ''; // 테이블 초기화
+                    products.forEach(product => {
+                        const row = `
+                            <tr>
+                                <td>${product.productName}</td>
+                                <td><img class="product-image" src="${product.productImage}" alt="상품 이미지" onclick="redirectToBuyPage('${product.productId}')"></td>
+                            </tr>
+                        `;
+                        productsTable.insertAdjacentHTML('beforeend', row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
+        }
+
+        function redirectToBuyPage(productId) {
+            window.location.href = `/buy/${productId}`; // Redirect to buy page with productId
+        }
+    </script>
 </body>
 </html>

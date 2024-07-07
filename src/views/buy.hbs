@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{main_title}}</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #FF1A52;
+        }
+        .buy-container {
+            width: 80%;
+            max-width: 1000px;
+            border: 1px solid #CCCCCC;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .product-info {
+            margin-bottom: 20px;
+        }
+        .product-image {
+            max-width: 200px;
+            max-height: 200px;
+        }
+        .buy-btn, .select-btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4A5667;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* 모달 스타일 */
+        .modal {
+            display: none; /* 초기에는 숨김 */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="buy-container">
+        <h1>{{main_title}}</h1>
+        <img class="product-image" src="{{productImage}}" alt="상품 이미지">
+        
+        <div class="product-info">
+            <h2>상품 정보</h2>
+            <p>{{productName}}</p>
+            <p>{{productPrice}}원</p>
+            <p>{{dealNumber}}개 주문시 발송</p>
+            <p>{{productStock}}개 남음</p>
+        </div>
+        <button class="select-btn" onclick="openModal()">함께하기</button>
+    </div>
+
+    <!-- 모달 -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>수량을 선택하세요:</p>
+            <input type="number" id="quantity" name="quantity" min="1" max="{{productStock}}" value="1">
+            <button onclick="addToCart()">장바구니에 추가</button>
+        </div>
+    </div>
+
+    <script>
+        // 모달 열기 함수
+        function openModal() {
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        // 모달 닫기 함수
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        // 장바구니에 추가 함수 (예시로 alert 창만 띄우는 형태)
+        function addToCart() {
+            var quantity = document.getElementById('quantity').value;
+            alert(quantity + '개를 장바구니에 추가했습니다.');
+            closeModal(); // 모달 닫기
+        }
+    </script>
+</body>
+</html>

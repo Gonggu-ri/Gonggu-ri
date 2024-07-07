@@ -22,28 +22,35 @@ export const selectSql = {
         const [result] = await promisePool.query(sql); // 기다림
         return result; // 반환
     },
+    getAllProducts: async () => { 
+        const sql = `select * from products`;
+        const [result] = await promisePool.query(sql); // 기다림
+        return result; // 반환
+    },
+    searchProductByName: async (productName) => { // 상품 이름으로 검색하는 비동기 함수
+        const sql = 'SELECT * FROM products WHERE productName LIKE ?';
+        const [rows] = await promisePool.query(sql, [`%${productName}%`]); // 기다림
+        return rows; // 반환
+    },
+    getProductById: async (productId) => {
+        const sql = 'SELECT * FROM products WHERE productId = ?';
+        const [rows] = await promisePool.query(sql, [productId]); // Pass productId directly
+        return rows;
+    }
 };
 
-// insert query : 새로운 입력 데이터를 추가함
+// insert query : 새로운 사용자를 추가함
 export const insertSql = {
     addUser: async (user) => { 
         const sql = `INSERT INTO users (userId, userPassword, userName, phoneNumber, userEmail, userAddress) VALUES (?, ?, ?, ?, ?, ?)`;
         const values = [user.userId, user.userPassword, user.userName, user.phoneNumber, user.userEmail, user.userAddress]; // 사용자 정보 배열화
-        const [result] = await promisePool.query(sql, values);  // 쿼리문 기다림
+        const [result] = await promisePool.query(sql, values);  // 뭐리문 기다림
         return result;
     },
-
-    addProduct: async (product) => {
-        // 상품 정보
-        const sql = `INSERT INTO products (productName, productPrice, productStock, dealNumber, productImage, productInfo) VALUES (?, ?, ?, ?, ?, ?)`;
-        const values = [product.productName, product.productPrice, product.productStock, product.dealNumber, product.productImage, product.productInfo];
-        const [result] = await promisePool.query(sql, values);
-
-        // QR 코드 정보
-        const qrSql = `INSERT INTO qr (productId, qrImage, discountPercentage) VALUES (?, ?, ?)`;
-        const qrValues = [result.insertId, '', product.discountPercentage];
-        await promisePool.query(qrSql, qrValues);
-
+    addProduct: async (product) => { 
+        const sql = `INSERT INTO products (userId, productName, productPrice, productStock, productInfo, productImage, dealNumber, qrDiscount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+        const values = [product.userId, product.productName, product.productPrice, product.productStock, product.productInfo, product.productImage, product.dealNumber, product.qrDiscount]; // 사용자 정보 배열화
+        const [result] = await promisePool.query(sql, values);  // 뭐리문 기다림
         return result;
     }
 };

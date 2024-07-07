@@ -21,8 +21,9 @@ CREATE TABLE products (
   productPrice INT NOT NULL,
   productStock INT NOT NULL,
   productInfo VARCHAR(100) NULL,
-  productImage VARCHAR(50) NOT NULL, -- url로 저장
+  productImage VARCHAR(200), -- url로 저장
   dealNumber INT NOT NULL,
+  qrDiscount VARCHAR(3) DEFAULT 0,
   PRIMARY KEY (productId),
   FOREIGN KEY (userId) REFERENCES users(userId) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -42,12 +43,10 @@ CREATE TABLE orders (
   FOREIGN KEY (productId) REFERENCES products(productId) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- qr Table: QR Code 정보 테이블
 CREATE TABLE qr (
   qrId INT NOT NULL AUTO_INCREMENT,
   productId INT NOT NULL,
   qrImage VARCHAR(50) NOT NULL,
-  discountPercentage VARCHAR(3) DEFAULT 0,
   PRIMARY KEY (qrId),
   FOREIGN KEY (productId) REFERENCES products(productId) ON UPDATE CASCADE ON DELETE CASCADE
 );

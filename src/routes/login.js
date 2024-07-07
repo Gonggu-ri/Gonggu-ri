@@ -1,23 +1,22 @@
-import express from 'express';
-import { selectSql } from '../database/sql';
+const express = require('express');
+const { selectSql } = require('../database/sql');
 
-const router = express.Router(); // 라우터 정의
+const router = express.Router();
 
-// get 요청
 router.get('/', (req, res) => {
     res.render('login');
 });
 
 router.post('/', async (req, res) => {
-    const vars = req.body; // req.body에 내용을 받아와
+    const { id, password } = req.body;
     const users = await selectSql.getUser();
 
     let loginSuccess = false;
 
-    users.map((user) => {
-        if (vars.id === user.userId && vars.password === user.userPassword) {
+    users.forEach(user => {
+        if (id === user.userId && password === user.userPassword) {
             console.log('Login success!');
-            req.session.user = { id: user.userId, checkLogin: true }; // session에 저장을 해놔
+            req.session.user = { id: user.userId, checkLogin: true };
             loginSuccess = true;
         }
     });
@@ -29,8 +28,8 @@ router.post('/', async (req, res) => {
                     location.href='/';
                 </script>`);
     } else {
-        res.redirect('/home'); // 홈페이지로 이동
+        res.redirect('/home');
     }
 });
 
-export default router;
+module.exports = router;
