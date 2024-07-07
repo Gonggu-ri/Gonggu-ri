@@ -1,0 +1,68 @@
+
+<title>상품 업로드</title>
+<style>
+    body {
+        height: 75vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: #FF1A52;
+    }
+    .frame {
+        border-radius: 15px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 350px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #productName, #productPrice, #productStock, #dealNumber, #discountPercentage, #productInfo, .btn {
+        font-size: 25px;
+    }
+    .input-group {
+        margin-top: 15px;
+    }
+    .btn {
+        background-color: #4A5667;
+        color: #FFFFFF;
+        width: 322px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<body>
+    <div class="frame">
+        <h1>상품 업로드</h1>
+        <form method="post" action='/upload'>
+            <div class="input-group">
+                <input id="productName" name="productName" type="text" required placeholder="상품 이름">
+            </div>
+            <div class="input-group">
+                <input id="productPrice" name="productPrice" type="number" required placeholder="상품 가격">
+            </div>
+            <div class="input-group">
+                <input id="productStock" name="productStock" type="number" required placeholder="상품 재고">
+            </div>
+            <div class="input-group">
+                <input id="dealNumber" name="dealNumber" type="number" required placeholder="공동구매 발주 개수">
+            </div>
+            <div class="input-group">
+                <input id="discountPercentage" name="discountPercentage" type="number" required placeholder="QR 코드 고객 할인율">
+            </div>
+            <div class="input-group">
+                <textarea id="productInfo" name="productInfo" rows="5" required placeholder="상품 설명 입력"></textarea>
+            </div>
+            <button class='btn' type="submit">판매하기</button>
+        </form>
+    </div>
+</body>
+

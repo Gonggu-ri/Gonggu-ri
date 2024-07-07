@@ -10,6 +10,7 @@ import expressSession from 'express-session'; // 로그인 할 때 session을 �
 import loginRouter from './routes/login.js'; // './routes/login.js'를 loginrouter로 불러와
 import homeRouter from './routes/home.js';
 import signupRouter from './routes/signup.js';
+import uploadRouter from './routes/upload.js'; 
 
 const PORT = 5000; // 기본값은 8000 or 5000
 
@@ -34,6 +35,7 @@ app.use(logger('dev'));
 app.use('/', loginRouter);
 app.use('/home', homeRouter);
 app.use('/signup', signupRouter); 
+app.use('/upload', uploadRouter);
 
 // 서버 시작 부분
 app.listen(PORT, () => {

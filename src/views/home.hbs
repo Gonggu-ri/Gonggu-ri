@@ -1,46 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{main_title}}</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <title>공구리 홈</title>
+    <link rel="stylesheet" href="/styles/home.css">
 </head>
 <body>
-    <h1>{{main_title}}</h1>
-
-    <h2>{{title}}</h2>
-
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone number</th>
-        </tr>
-        {{#each users}} 
-        <tr>
-            <td>{{this.userId}}</td>
-            <td>{{this.userName}}</td>
-            <td>{{this.userEmail}}</td>
-            <td>{{this.userNumber}}</td>
-        </tr>
-        {{/each}}
-    </table>
+    <header class="header">
+        <div class="logo">공구리</div>
+        <div class="nav-buttons">
+            <button onclick="location.href='/sell'">판매</button>
+            <button onclick="location.href='/buy'">구매</button>
+        </div>
+    </header>
+    <div class="main-content">
+        <div class="search-bar">
+            <input type="text" placeholder="상품명 검색">
+            <button onclick="location.href='/search'">🔍</button>
+        </div>
+        <h2>판매 중</h2>
+        <div class="products">
+            <!-- 상품 리스트가 여기에 표시될 예정 -->
+        </div>
+    </div>
+    <button class="upload-button" onclick="location.href='/upload'">+ 공구하기</button>
 </body>
 </html>
